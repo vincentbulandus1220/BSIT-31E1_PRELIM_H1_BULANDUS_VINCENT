@@ -1,0 +1,82 @@
+using System;
+
+namespace BSIT31EE1_PRELIM_A2_BULANDUS_NIÑO
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                // Ask for first number or exit
+                Console.Write("Enter first number (or 'exit' to quit): ");
+                string input1 = Console.ReadLine()?.Trim();
+
+                if (input1.ToLower() == "exit")
+                {
+                    Console.WriteLine("Program ends.");
+                    break;
+                }
+
+                // Validate first number
+                if (!double.TryParse(input1, out double num1))
+                {
+                    Console.WriteLine("Invalid number. Try again.\n");
+                    continue;
+                }
+
+                // Ask for second number
+                Console.Write("Enter second number: ");
+                string input2 = Console.ReadLine()?.Trim();
+
+                if (!double.TryParse(input2, out double num2))
+                {
+                    Console.WriteLine("Invalid number. Try again.\n");
+                    continue;
+                }
+
+                // Ask for operator
+                Console.Write("Enter operator (+, -, *, /): ");
+                string op = Console.ReadLine()?.Trim();
+
+                double result = 0;
+                bool validOp = true;
+
+                // Perform calculation
+                switch (op)
+                {
+                    case "+":
+                        result = num1 + num2;
+                        break;
+                    case "-":
+                        result = num1 - num2;
+                        break;
+                    case "*":
+                        result = num1 * num2;
+                        break;
+                    case "/":
+                        if (num2 == 0)
+                        {
+                            Console.WriteLine("Error: Cannot divide by zero.\n");
+                            validOp = false;
+                        }
+                        else
+                        {
+                            result = num1 / num2;
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Invalid operator. Use +, -, *, / only.\n");
+                        validOp = false;
+                        break;
+                }
+
+                // Show result if valid
+                if (validOp)
+                {
+                    Console.WriteLine($"Result: {result}\n");
+                }
+            }
+        }
+    }
+}
